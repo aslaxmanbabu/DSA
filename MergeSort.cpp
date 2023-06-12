@@ -4,10 +4,10 @@ using namespace std;
 
 void merge(int arr[], int left, int mid, int right) {
     
-    int n1 = mid - left + 1;
+    int n1 = mid+ 1 - left;
     int n2 = right - mid;
     
-    int leftarr[n1], rightarr[n2]; 
+    int leftarr[n1], rightarr[n2];
     
     for(int i=0; i<n1; i++) {
         leftarr[i] = arr[left+i];
@@ -16,7 +16,7 @@ void merge(int arr[], int left, int mid, int right) {
         rightarr[j] = arr[mid+1+j];
     }
     
-    int i = 0, j = 0, k = left; 
+    int i=0, j=0, k=left;
     
     while(i<n1 and j<n2) {
         if(leftarr[i] <= rightarr[j]) {
@@ -41,14 +41,14 @@ void merge(int arr[], int left, int mid, int right) {
         j++;
         k++;
     }
+    
 }
 
 void mergeSort(int arr[], int begin, int end) {
     
     if(begin >= end) {
-        return ;
+        return;
     }
-    
     int mid = begin + (end-begin)/2;
     mergeSort(arr, begin, mid);
     mergeSort(arr, mid+1, end);
@@ -66,17 +66,22 @@ void display(int arr[], int n) {
 
 int main()
 {
-    int arr[] = {12, 11, 13, 5, 6, 7};
-    int n = sizeof(arr)/sizeof(arr[0]);
+    int n;
+    cout<<"Enter number of elements: ";
+    cin>>n;
+    int arr[n];
+    cout<<"Enter an array: ";
+    for(int i=0; i<n; i++) {
+        cin>>arr[i];
+    }
     
-    cout<<"Given array is: ";
+    cout<<"Given array: ";
     display(arr, n);
     
     mergeSort(arr, 0, n-1);
     
-    cout<<endl<<"Sorted Array:   ";
+    cout<<endl<<"Sorted array: ";
     display(arr, n);
 
     return 0;
 }
-
