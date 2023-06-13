@@ -3,25 +3,16 @@ using namespace std;
 
 class Edge {
     public:
-    int src, dest, weight;    
+    int src, dest, weight;  
 };
 
 class Graph {
     public:
         int V, E;
         Edge *edge = new Edge();
-        Graph *createGraph(int , int );
         void printArr(int[] , int );
-        void BellmanFord(Graph *, int );    
+        void BellmanFord(Graph *, int , int , int );
 };
-
-Graph * Graph :: createGraph(int V, int E) {
-    Graph *graph = new Graph();
-    graph->V = V;
-    graph->E = E;
-    graph->edge = new Edge[E];
-    return graph;
-}
 
 void Graph :: printArr(int dist[], int n) {
     cout<<"Vertex\tDistance from Source"<<endl;
@@ -30,11 +21,9 @@ void Graph :: printArr(int dist[], int n) {
     }
 }
 
-void Graph :: BellmanFord(Graph* graph, int src) {
-    int V = graph->V;
-    int E = graph->E;
-    int dist[V];
+void Graph :: BellmanFord(Graph* graph, int src, int V, int E) {
     
+    int dist[V];
     for(int i=0; i<V; i++) {
         dist[i] = 999;
     }
@@ -60,7 +49,9 @@ int main()
     cin>>V;
     cout<<"Enter number of egdes: ";
     cin>>E;
-    Graph * graph = graph->createGraph(V, E);
+    
+    Graph* graph = new Graph();
+    graph->edge = new Edge[E];
     
     for(int i=0; i<E; i++) {
         cout<<"Enter source "<<i<<": ";
@@ -73,8 +64,7 @@ int main()
     
     cout<<"Enter the source node for traversal: ";
     cin>>T;
-    
-    graph->BellmanFord(graph, T);
+    graph->BellmanFord(graph, T, V, E);
     
     return 0;
 }
